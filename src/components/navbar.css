@@ -1,0 +1,35 @@
+.logo{
+    float: left;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.categorias{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 1px;
+    isolation: isolate;
+    position: absolute;
+    width: 804;
+    height: 40px;
+    left: 446px;
+    top: 59.5px;
+
+    mix-blend-mode: normal;
+/*     position: fixed;
+    margin-left: 400px;
+    top: 42px;
+    align-items:center; */
+}
+
+.carrito{
+    float: right;
+    padding: 5px;
+    margin-top: 30px;
+    margin-right: 20px;
+    height: 40px;
+
+}

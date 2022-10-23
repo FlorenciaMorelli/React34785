@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  background: #242424;
+  height: 100px;
+}
+
+.itemListContainer{
+  margin-left: 20px;
+  margin-top: 5px;
 }
 
 .App-logo {
