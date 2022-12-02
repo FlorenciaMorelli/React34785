@@ -18,16 +18,16 @@ function ItemCount({ stock, onAddToCart, text }) {
   return (
     <div className="itemcount_container">
       <div className="itemcount_control">
-        <Button color="#903024" onClick={handleSubstract}>
+        <Button color="#b53f3f" onClick={handleSubstract}>
           -
         </Button>
-        <span>{count}</span>
-        <Button color="#239044" onClick={handleAdd}>
+        <span className="count">{count}</span>
+        <Button color="#3ab546" onClick={handleAdd}>
           +
         </Button>
       </div>
       <div className="itemcount_btns">
-        <Button onClick={() => onAddToCart(count)}>{text}</Button>
+        <Button type="fitContent" onClick={() => onAddToCart(count)}>{text}</Button>
       </div>
     </div>
   );

@@ -1,0 +1,25 @@
+.tuCarrito{
+    margin-top: 100px;
+}
+
+.form{
+    padding: 15px 30px;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.total{
+    align-items: flex-end;
+    justify-content: right;
+    display: inline-flex;
+    margin: 40px;
+}
+
+.item{
+    border: solid thin rgb(174, 207, 239);
+    border-radius: 15px;
+    padding: 15px 30px;
+    max-width: fit-content;
+}

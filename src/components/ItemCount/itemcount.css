@@ -1,6 +1,6 @@
 .itemcount_container{
-    border: solid thin rgb(174, 207, 239);
-    border-radius: 15px;
+/*     border: solid thin rgb(174, 207, 239);
+ */    border-radius: 15px;
     padding: 12px 25px;
     display: flex;
     flex-direction: column;
@@ -15,4 +15,12 @@
     display: flex;
     justify-content: space-evenly;
     padding: 2px 10px;
+  }
+
+  .count{
+    border: solid thin rgb(174, 207, 239);
+    border-radius: 15px;
+    padding: 2px 30px;
+    margin: 10px;
+    text-align: center;
   }

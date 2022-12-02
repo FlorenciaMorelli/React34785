@@ -1,0 +1,8 @@
+.buyForm{
+    border: solid thin rgb(174, 207, 239);
+    border-radius: 15px;
+    padding: 15px 30px;
+    margin: 10px;
+    text-align: center;
+    max-width: fit-content;
+}

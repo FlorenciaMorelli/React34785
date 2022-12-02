@@ -5,6 +5,7 @@ import CartWidget from "./CartWidget/CartWidget";
 import Logo from "./Logo/logotipo.svg";
 import {Link} from "react-router-dom"
 import "./navbar.css";
+import CartView from "./CartView/CartView.jsx";
 
 function NavBar(){
     return (
@@ -19,23 +20,25 @@ function NavBar(){
         </div>
         <div className="categorias">
             <Link to="/category/Urbanas">
-                <Button>Urbanas</Button>
+                <Button type="navButton">Urbanas</Button>
                 </Link>
             <Link to="/category/Running">
-                <Button>Running</Button>
+                <Button type="navButton">Running</Button>
             </Link>
             <Link to="/category/Training">
-                <Button>Training</Button>
+                <Button type="navButton">Training</Button>
             </Link>
             <Link to="/category/Tenis">
-                <Button>Tenis</Button>
+                <Button type="navButton">Tenis</Button>
             </Link>
             <Link to="/category/Ojotas">
-                <Button>Ojotas</Button>
+                <Button type="navButton">Ojotas</Button>
             </Link>
         </div>
         <div className="carrito">
-            <CartWidget/>
+            <Link to="/cart" element={CartView}>
+                <CartWidget/>
+            </Link>
         </div>
     </>
     )
