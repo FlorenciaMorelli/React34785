@@ -13,13 +13,13 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCtwr4v8l0kcRWnZX5d_5sf0EOIjWwXeH0",
-    authDomain: "react34785-16ce9.firebaseapp.com",
-    projectId: "react34785-16ce9",
-    storageBucket: "react34785-16ce9.appspot.com",
-    messagingSenderId: "719563363301",
-    appId: "1:719563363301:web:950fd35971263deb04550c",
-    measurementId: "G-J8L0QSPZSP"
+  apiKey: "AIzaSyCtwr4v8l0kcRWnZX5d_5sf0EOIjWwXeH0",
+  authDomain: "react34785-16ce9.firebaseapp.com",
+  projectId: "react34785-16ce9",
+  storageBucket: "react34785-16ce9.appspot.com",
+  messagingSenderId: "719563363301",
+  appId: "1:719563363301:web:950fd35971263deb04550c",
+  measurementId: "G-J8L0QSPZSP"
 };
 
 const FirebaseApp = initializeApp(firebaseConfig);
@@ -31,8 +31,8 @@ export function testDatabase() {
 }
 
 export async function getSingleItemFromAPI(id) {
-  try { 
-    const docRef = doc(DB, "products", id);
+  try {
+    const docRef = doc(DB, "prod", id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -44,7 +44,7 @@ export async function getSingleItemFromAPI(id) {
       throw new Error("El producto no existe");
     }
   }
-  catch(error){
+  catch (error) {
     throw error;
   }
 }
@@ -53,7 +53,7 @@ export async function getSingleItemFromAPI(id) {
 export async function getItemsFromAPI() {
   try {
     // 1. Necesito conectarme a la colección de "productos" con "collection"
-    const collectionProducts = collection(DB, "products");
+    const collectionProducts = collection(DB, "prod");
 
     // 2. Necesito traer todos los documentos existentes con getDocs
     let respuesta = await getDocs(collectionProducts);
@@ -74,7 +74,7 @@ export async function getItemsFromAPI() {
 }
 
 export async function getItemsFromAPIByCategory(categoryId) {
-  const productsRef = collection(DB, "products");
+  const productsRef = collection(DB, "prod");
   const myQuery = query(productsRef, where("category", "==", categoryId));
 
   const productsSnap = await getDocs(myQuery);
@@ -101,7 +101,7 @@ export async function createBuyOrderFirestore(buyOrderData) {
 }
 
 export async function createBuyOrderFirestoreWithStock(buyOrderData) {
-  const collectionProductsRef = collection(DB, "products");
+  const collectionProductsRef = collection(DB, "prod");
   const collectionOrdersRef = collection(DB, "buyorders");
   const batch = writeBatch(DB);
 
@@ -130,409 +130,371 @@ export async function createBuyOrderFirestoreWithStock(buyOrderData) {
 }
 
 export async function exportItemsToFirestore() {
-  const items = [{
-    "id": 1,
-    "title": "Castleman",
-    "price": 1454,
-    "stock": 111,
-    "category": "Running",
-    "thumbnail": "http://dummyimage.com/163x100.png/ff4444/ffffff",
-    "brand": "Promethazine Hydrochloride"
-  }, {
-    "id": 2,
-    "title": "Campbell",
-    "price": 8860,
-    "stock": 67,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/204x100.png/ff4444/ffffff",
-    "brand": "Escavite D"
-  }, {
-    "id": 3,
-    "title": "Mehaffey",
-    "price": 1461,
-    "stock": 185,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/153x100.png/dddddd/000000",
-    "brand": "Telmisartan"
-  }, {
-    "id": 4,
-    "title": "Craythorn",
-    "price": 8136,
-    "stock": 114,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/155x100.png/dddddd/000000",
-    "brand": "Diazepam"
-  }, {
-    "id": 5,
-    "title": "Signorelli",
-    "price": 3355,
-    "stock": 253,
-    "category": "Ojotas",
-    "thumbnail": "http://dummyimage.com/247x100.png/5fa2dd/ffffff",
-    "brand": "Ibutilide Fumarate"
-  }, {
-    "id": 6,
-    "title": "Patley",
-    "price": 4618,
-    "stock": 28,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/242x100.png/5fa2dd/ffffff",
-    "brand": "Haddock"
-  }, {
-    "id": 7,
-    "title": "Knox",
-    "price": 230,
-    "stock": 99,
-    "category": "Ojotas",
-    "thumbnail": "http://dummyimage.com/132x100.png/dddddd/000000",
-    "brand": "DIGOX"
-  }, {
-    "id": 8,
-    "title": "Folcarelli",
-    "price": 494,
-    "stock": 20,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/183x100.png/dddddd/000000",
-    "brand": "Quetiapine fumarate"
-  }, {
-    "id": 9,
-    "title": "Stobbie",
-    "price": 9447,
-    "stock": 2,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/129x100.png/dddddd/000000",
-    "brand": "OXYGEN"
-  }, {
-    "id": 10,
-    "title": "Kahane",
-    "price": 3328,
-    "stock": 134,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/210x100.png/ff4444/ffffff",
-    "brand": "LBEL COULEUR LUXE AMPLIFIER XP"
-  }, {
-    "id": 11,
-    "title": "Radbourne",
-    "price": 2687,
-    "stock": 157,
-    "category": "Running",
-    "thumbnail": "http://dummyimage.com/145x100.png/cc0000/ffffff",
-    "brand": "babies r us infants pain relief"
-  }, {
-    "id": 12,
-    "title": "Ricciardelli",
-    "price": 4017,
-    "stock": 227,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/238x100.png/cc0000/ffffff",
-    "brand": "Glyburide"
-  }, {
-    "id": 13,
-    "title": "Geddes",
-    "price": 745,
-    "stock": 233,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/189x100.png/5fa2dd/ffffff",
-    "brand": "Gabapentin"
-  }, {
-    "id": 14,
-    "title": "Armstead",
-    "price": 5542,
-    "stock": 139,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/231x100.png/5fa2dd/ffffff",
-    "brand": "INDOMETHACIN"
-  }, {
-    "id": 15,
-    "title": "Ziems",
-    "price": 3648,
-    "stock": 17,
-    "category": "Running",
-    "thumbnail": "http://dummyimage.com/210x100.png/ff4444/ffffff",
-    "brand": "Pepto-Bismol"
-  }, {
-    "id": 16,
-    "title": "Churchman",
-    "price": 5413,
-    "stock": 65,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/246x100.png/dddddd/000000",
-    "brand": "CORGARD"
-  }, {
-    "id": 17,
-    "title": "McMickan",
-    "price": 4454,
-    "stock": 54,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/168x100.png/dddddd/000000",
-    "brand": "Sunmark Phenolated Calamine"
-  }, {
-    "id": 18,
-    "title": "Sawkins",
-    "price": 1862,
-    "stock": 45,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/128x100.png/cc0000/ffffff",
-    "brand": "Molds, Rusts and Smuts, Mucor racemosus"
-  }, {
-    "id": 19,
-    "title": "Isoldi",
-    "price": 824,
-    "stock": 298,
-    "category": "Running",
-    "thumbnail": "http://dummyimage.com/106x100.png/ff4444/ffffff",
-    "brand": "COUMADIN"
-  }, {
-    "id": 20,
-    "title": "Alberts",
-    "price": 470,
-    "stock": 50,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/159x100.png/dddddd/000000",
-    "brand": "Hand Sanitizer"
-  }, {
-    "id": 21,
-    "title": "Thoresby",
-    "price": 5429,
-    "stock": 122,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/218x100.png/cc0000/ffffff",
-    "brand": "Vertebra lumbalis 6"
-  }, {
-    "id": 22,
-    "title": "Punch",
-    "price": 7525,
-    "stock": 113,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/215x100.png/5fa2dd/ffffff",
-    "brand": "Pollens - Trees, Tree Mix 11"
-  }, {
-    "id": 23,
-    "title": "Ancliffe",
-    "price": 7217,
-    "stock": 276,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/241x100.png/cc0000/ffffff",
-    "brand": "Alba Sunblock Natural Sport SPF 45"
-  }, {
-    "id": 24,
-    "title": "McVanamy",
-    "price": 1182,
-    "stock": 76,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/125x100.png/cc0000/ffffff",
-    "brand": "HAND SANITIZING"
-  }, {
-    "id": 25,
-    "title": "Peeke-Vout",
-    "price": 7334,
-    "stock": 84,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/131x100.png/5fa2dd/ffffff",
-    "brand": "LITHIUM CARBONATE"
-  }, {
-    "id": 26,
-    "title": "Charpin",
-    "price": 4212,
-    "stock": 184,
-    "category": "Ojotas",
-    "thumbnail": "http://dummyimage.com/115x100.png/ff4444/ffffff",
-    "brand": "Cumin"
-  }, {
-    "id": 27,
-    "title": "Russ",
-    "price": 8900,
-    "stock": 101,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/195x100.png/cc0000/ffffff",
-    "brand": "Medicated Apricot Scrub"
-  }, {
-    "id": 28,
-    "title": "McReynolds",
-    "price": 5633,
-    "stock": 5,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/145x100.png/dddddd/000000",
-    "brand": "Roccos Old School"
-  }, {
-    "id": 29,
-    "title": "Leisk",
-    "price": 526,
-    "stock": 19,
-    "category": "Running",
-    "thumbnail": "http://dummyimage.com/121x100.png/dddddd/000000",
-    "brand": "2 in 1"
-  }, {
-    "id": 30,
-    "title": "Younie",
-    "price": 7475,
-    "stock": 135,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/156x100.png/ff4444/ffffff",
-    "brand": "Protection 50 Body"
-  }, {
-    "id": 31,
-    "title": "Chewter",
-    "price": 5840,
-    "stock": 110,
-    "category": "Ojotas",
-    "thumbnail": "http://dummyimage.com/143x100.png/5fa2dd/ffffff",
-    "brand": "anti nausea"
-  }, {
-    "id": 32,
-    "title": "Mallall",
-    "price": 9029,
-    "stock": 233,
-    "category": "Running",
-    "thumbnail": "http://dummyimage.com/175x100.png/ff4444/ffffff",
-    "brand": "Methocarbamol"
-  }, {
-    "id": 33,
-    "title": "McGarel",
-    "price": 5439,
-    "stock": 31,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/192x100.png/5fa2dd/ffffff",
-    "brand": "Tork Advanced Antimicrobial"
-  }, {
-    "id": 34,
-    "title": "Quibell",
-    "price": 2432,
-    "stock": 272,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/217x100.png/cc0000/ffffff",
-    "brand": "Tea Tree Antiseptic"
-  }, {
-    "id": 35,
-    "title": "Aers",
-    "price": 3743,
-    "stock": 291,
-    "category": "Ojotas",
-    "thumbnail": "http://dummyimage.com/136x100.png/cc0000/ffffff",
-    "brand": "Methylprednisolone"
-  }, {
-    "id": 36,
-    "title": "O'Neill",
-    "price": 2726,
-    "stock": 94,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/137x100.png/5fa2dd/ffffff",
-    "brand": "Reflux RXS"
-  }, {
-    "id": 37,
-    "title": "MacConnulty",
-    "price": 404,
-    "stock": 9,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/123x100.png/5fa2dd/ffffff",
-    "brand": "FLUPHENAZINE HYDROCHLORIDE"
-  }, {
-    "id": 38,
-    "title": "Jado",
-    "price": 4007,
-    "stock": 84,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/248x100.png/5fa2dd/ffffff",
-    "brand": "Puncture Wounds Bites"
-  }, {
-    "id": 39,
-    "title": "Larciere",
-    "price": 6610,
-    "stock": 183,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/144x100.png/dddddd/000000",
-    "brand": "Perindopril Erbumine"
-  }, {
-    "id": 40,
-    "title": "Gammill",
-    "price": 3055,
-    "stock": 209,
-    "category": "Running",
-    "thumbnail": "http://dummyimage.com/142x100.png/cc0000/ffffff",
-    "brand": "COCHLIOBOLUS SATIVUS"
-  }, {
-    "id": 41,
-    "title": "Librey",
-    "price": 3741,
-    "stock": 34,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/113x100.png/dddddd/000000",
-    "brand": "Levetiracetam"
-  }, {
-    "id": 42,
-    "title": "Lennarde",
-    "price": 9580,
-    "stock": 111,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/205x100.png/cc0000/ffffff",
-    "brand": "Acetylcysteine"
-  }, {
-    "id": 43,
-    "title": "Noweak",
-    "price": 4521,
-    "stock": 43,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/221x100.png/dddddd/000000",
-    "brand": "Piroxicam"
-  }, {
-    "id": 44,
-    "title": "Richardsson",
-    "price": 8647,
-    "stock": 171,
-    "category": "Ojotas",
-    "thumbnail": "http://dummyimage.com/209x100.png/ff4444/ffffff",
-    "brand": "TOTAL TIN"
-  }, {
-    "id": 45,
-    "title": "Ilyas",
-    "price": 3065,
-    "stock": 62,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/187x100.png/5fa2dd/ffffff",
-    "brand": "Sensipar"
-  }, {
-    "id": 46,
-    "title": "Whyard",
-    "price": 2640,
-    "stock": 291,
-    "category": "Ojotas",
-    "thumbnail": "http://dummyimage.com/129x100.png/ff4444/ffffff",
-    "brand": "Rash Relief Antifungal"
-  }, {
-    "id": 47,
-    "title": "Roggers",
-    "price": 5105,
-    "stock": 136,
-    "category": "Urbanas",
-    "thumbnail": "http://dummyimage.com/192x100.png/dddddd/000000",
-    "brand": "Unblemish"
-  }, {
-    "id": 48,
-    "title": "Surgeoner",
-    "price": 1594,
-    "stock": 255,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/209x100.png/cc0000/ffffff",
-    "brand": "Pure Finish Mineral Tinted Moisturizer SPF 15 Fair"
-  }, {
-    "id": 49,
-    "title": "Creamen",
-    "price": 6457,
-    "stock": 104,
-    "category": "Tenis",
-    "thumbnail": "http://dummyimage.com/234x100.png/ff4444/ffffff",
-    "brand": "Ciprofloxacin"
-  }, {
-    "id": 50,
-    "title": "Henryson",
-    "price": 2306,
-    "stock": 171,
-    "category": "Training",
-    "thumbnail": "http://dummyimage.com/211x100.png/ff4444/ffffff",
-    "brand": "ULTRACET"
-  }];
+  const items = [
+    {
+      "id": 1,
+      "title": "Nike Metcon 9 Workout Shoes",
+      "price": 14999,
+      "stock": 20,
+      "category": "Training",
+      "thumbnail": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/ef1dafdd-37cc-4a75-8778-e55cea1185e8/metcon-9-workout-shoes-ndTxtM.png",
+      "brand": "Nike"
+    },
+    {
+      "id": 2,
+      "title": "Adidas ZX 1K Boost Shoes",
+      "price": 11999,
+      "stock": 25,
+      "category": "Running",
+      "thumbnail": "https://www.tobys.com/cdn/shop/products/ssph.zone-1664244680-DA8570-001_a.jpg?v=1664245217",
+      "brand": "Adidas"
+    },
+    {
+      "id": 3,
+      "title": "Converse Chuck Taylor All Star",
+      "price": 6999,
+      "stock": 30,
+      "category": "Urbanas",
+      "thumbnail": "https://images.journeys.com/images/products/1_4386_FS.JPG",
+      "brand": "Converse"
+    },
+    {
+      "id": 4,
+      "title": "Puma Ralph Sampson Mid",
+      "price": 8999,
+      "stock": 25,
+      "category": "Urbanas",
+      "thumbnail": "https://hypepoint.ca/cdn/shop/files/adidas-Samba-OG-Black-White-Gum-GS-Product_d81c2aff-5d85-4a4d-bf63-2da7ffb4c3a5.webp?v=1718045988&width=1400",
+      "brand": "Puma"
+    },
+    {
+      "id": 5,
+      "title": "Vans Old Skool",
+      "price": 7999,
+      "stock": 30,
+      "category": "Urbanas",
+      "thumbnail": "https://www.vans.co.nz/media/catalog/product/v/n/vn-0w9t6bt_blktrwht_01.jpg?auto=webp&quality=85&format=pjpg&width=100%25&fit=cover",
+      "brand": "Vans"
+    },
+    {
+      "id": 6,
+      "title": "Golden Goose Super Star",
+      "price": 15999,
+      "stock": 15,
+      "category": "Urbanas",
+      "thumbnail": "https://images.stockx.com/360/Golden-Goose-Super-Star-Black-White-Leather-W/Images/Golden-Goose-Super-Star-Black-White-Leather-W/Lv2/img01.jpg?fm=webp&auto=compress&w=480&dpr=2&updated_at=1664432592&h=320&q=60",
+      "brand": "Golden Goose"
+    },
+    {
+      "id": 7,
+      "title": "New Balance Fresh Foam X 860v12",
+      "price": 12999,
+      "stock": 20,
+      "category": "Tenis",
+      "thumbnail": "https://d2ob0iztsaxy5v.cloudfront.net/product/196366/1963667220_zm.jpg",
+      "brand": "New Balance"
+    },
+    {
+      "id": 8,
+      "title": "Asics GEL-Kayano 28",
+      "price": 13999,
+      "stock": 15,
+      "category": "Tenis",
+      "thumbnail": "https://static.ftshp.digital/img/p/6/7/4/9/7/1/674971-full_product.jpg",
+      "brand": "Asics"
+    },
+    {
+      "id": 9,
+      "title": "Nike Air Zoom Pegasus 38",
+      "price": 11999,
+      "stock": 25,
+      "category": "Tenis",
+      "thumbnail": "https://i5.walmartimages.com/asr/bac97f28-9d8b-4fcb-a874-139b3b5b09a7_1.2db490eb7338563d23612b593d5b6c76.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+      "brand": "Nike"
+    },
+    {
+      "id": 10,
+      "title": "Havaianas Top Mix",
+      "price": 2999,
+      "stock": 50,
+      "category": "Ojotas",
+      "thumbnail": "https://rukminim2.flixcart.com/image/850/1000/kcz4rrk0/slipper-flip-flop/g/m/1/9-su-wt-blk-pt-deny-brown-black-white-original-imaftz9pasqrztwc.jpeg?q=20&crop=false",
+      "brand": "Havaianas"
+    },
+    {
+      "id": 11,
+      "title": "Off-White Black Flip Flops",
+      "price": 4999,
+      "stock": 40,
+      "category": "Ojotas",
+      "thumbnail": "https://cdn-images.farfetch-contents.com/off-white-black-flip-flops_14683259_23646508_1000.jpg",
+      "brand": "Off-White"
+    },
+    {
+      "id": 12,
+      "title": "Crocs Classic Clog",
+      "price": 3999,
+      "stock": 30,
+      "category": "Ojotas",
+      "thumbnail": "https://www.farmers.co.nz/INTERSHOP/static/WFS/Farmers-Shop-Site/-/Farmers-Shop/en_NZ/product/68/68/726/6868726_00_W1200_H1565.jpg",
+      "brand": "Crocs"
+    },
+    {
+      "id": 13,
+      "title": "Birkenstock Arizona EVA",
+      "price": 6999,
+      "stock": 20,
+      "category": "Ojotas",
+      "thumbnail": "https://d2ob0iztsaxy5v.cloudfront.net/product/330296/3302967060m1_zm.jpg",
+      "brand": "Birkenstock"
+    },
+    {
+      "id": 14,
+      "title": "Nike Metcon 9 Workout Shoes - Grey",
+      "price": 14999,
+      "stock": 20,
+      "category": "Training",
+      "thumbnail": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/ef1dafdd-37cc-4a75-8778-e55cea1185e8/metcon-9-workout-shoes-ndTxtM.png",
+      "brand": "Nike"
+    },
+    {
+      "id": 15,
+      "title": "Adidas ZX 1K Boost Shoes - Black",
+      "price": 11999,
+      "stock": 25,
+      "category": "Running",
+      "thumbnail": "https://www.tobys.com/cdn/shop/products/ssph.zone-1664244680-DA8570-001_a.jpg?v=1664245217",
+      "brand": "Adidas"
+    },
+    {
+      "id": 16,
+      "title": "Converse Chuck Taylor All Star - Red",
+      "price": 6999,
+      "stock": 30,
+      "category": "Urbanas",
+      "thumbnail": "https://images.journeys.com/images/products/1_4386_FS.JPG",
+      "brand": "Converse"
+    },
+    {
+      "id": 17,
+      "title": "Puma Ralph Sampson Mid - White",
+      "price": 8999,
+      "stock": 25,
+      "category": "Urbanas",
+      "thumbnail": "https://hypepoint.ca/cdn/shop/files/adidas-Samba-OG-Black-White-Gum-GS-Product_d81c2aff-5d85-4a4d-bf63-2da7ffb4c3a5.webp?v=1718045988&width=1400",
+      "brand": "Puma"
+    },
+    {
+      "id": 18,
+      "title": "Vans Old Skool - Black",
+      "price": 7999,
+      "stock": 30,
+      "category": "Urbanas",
+      "thumbnail": "https://www.vans.co.nz/media/catalog/product/v/n/vn-0w9t6bt_blktrwht_01.jpg?auto=webp&quality=85&format=pjpg&width=100%25&fit=cover",
+      "brand": "Vans"
+    },
+    {
+      "id": 19,
+      "title": "Golden Goose Super Star - White",
+      "price": 15999,
+      "stock": 15,
+      "category": "Urbanas",
+      "thumbnail": "https://images.stockx.com/360/Golden-Goose-Super-Star-Black-White-Leather-W/Images/Golden-Goose-Super-Star-Black-White-Leather-W/Lv2/img01.jpg?fm=webp&auto=compress&w=480&dpr=2&updated_at=1664432592&h=320&q=60",
+      "brand": "Golden Goose"
+    },
+    {
+      "id": 20,
+      "title": "New Balance Fresh Foam X 860v12 - Grey",
+      "price": 12999,
+      "stock": 20,
+      "category": "Tenis",
+      "thumbnail": "https://d2ob0iztsaxy5v.cloudfront.net/product/196366/1963667220_zm.jpg",
+      "brand": "New Balance"
+    },
+    {
+      "id": 21,
+      "title": "Asics GEL-Kayano 28 - Blue",
+      "price": 13999,
+      "stock": 15,
+      "category": "Tenis",
+      "thumbnail": "https://static.ftshp.digital/img/p/6/7/4/9/7/1/674971-full_product.jpg",
+      "brand": "Asics"
+    },
+    {
+      "id": 22,
+      "title": "Nike Air Zoom Pegasus 38 - Black",
+      "price": 11999,
+      "stock": 25,
+      "category": "Tenis",
+      "thumbnail": "https://i5.walmartimages.com/asr/bac97f28-9d8b-4fcb-a874-139b3b5b09a7_1.2db490eb7338563d23612b593d5b6c76.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+      "brand": "Nike"
+    },
+    {
+      "id": 23,
+      "title": "Havaianas Top Mix - Black",
+      "price": 2999,
+      "stock": 50,
+      "category": "Ojotas",
+      "thumbnail": "https://rukminim2.flixcart.com/image/850/1000/kcz4rrk0/slipper-flip-flop/g/m/1/9-su-wt-blk-pt-deny-brown-black-white-original-imaftz9pasqrztwc.jpeg?q=20&crop=false",
+      "brand": "Havaianas"
+    },
+    {
+      "id": 24,
+      "title": "Off-White Black Flip Flops",
+      "price": 4999,
+      "stock": 40,
+      "category": "Ojotas",
+      "thumbnail": "https://cdn-images.farfetch-contents.com/off-white-black-flip-flops_14683259_23646508_1000.jpg",
+      "brand": "Off-White"
+    },
+    {
+      "id": 25,
+      "title": "Crocs Classic Clog - Blue",
+      "price": 3999,
+      "stock": 30,
+      "category": "Ojotas",
+      "thumbnail": "https://www.farmers.co.nz/INTERSHOP/static/WFS/Farmers-Shop-Site/-/Farmers-Shop/en_NZ/product/68/68/726/6868726_00_W1200_H1565.jpg",
+      "brand": "Crocs"
+    },
+    {
+      "id": 26,
+      "title": "Birkenstock Arizona EVA - Black",
+      "price": 6999,
+      "stock": 20,
+      "category": "Ojotas",
+      "thumbnail": "https://d2ob0iztsaxy5v.cloudfront.net/product/330296/3302967060m1_zm.jpg",
+      "brand": "Birkenstock"
+    },
+    {
+      "id": 27,
+      "title": "Nike Metcon 9 Workout Shoes - Black",
+      "price": 14999,
+      "stock": 20,
+      "category": "Training",
+      "thumbnail": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/ef1dafdd-37cc-4a75-8778-e55cea1185e8/metcon-9-workout-shoes-ndTxtM.png",
+      "brand": "Nike"
+    },
+    {
+      "id": 28,
+      "title": "Adidas ZX 1K Boost Shoes - White",
+      "price": 11999,
+      "stock": 25,
+      "category": "Running",
+      "thumbnail": "https://www.tobys.com/cdn/shop/products/ssph.zone-1664244680-DA8570-001_a.jpg?v=1664245217",
+      "brand": "Adidas"
+    },
+    {
+      "id": 29,
+      "title": "Converse Chuck Taylor All Star - Black",
+      "price": 6999,
+      "stock": 30,
+      "category": "Urbanas",
+      "thumbnail": "https://images.journeys.com/images/products/1_4386_FS.JPG",
+      "brand": "Converse"
+    },
+    {
+      "id": 30,
+      "title": "Puma Ralph Sampson Mid - Blue",
+      "price": 8999,
+      "stock": 25,
+      "category": "Urbanas",
+      "thumbnail": "https://hypepoint.ca/cdn/shop/files/adidas-Samba-OG-Black-White-Gum-GS-Product_d81c2aff-5d85-4a4d-bf63-2da7ffb4c3a5.webp?v=1718045988&width=1400",
+      "brand": "Puma"
+    },
+    {
+      "id": 31,
+      "title": "Vans Old Skool - Red",
+      "price": 7999,
+      "stock": 30,
+      "category": "Urbanas",
+      "thumbnail": "https://www.vans.co.nz/media/catalog/product/v/n/vn-0w9t6bt_blktrwht_01.jpg?auto=webp&quality=85&format=pjpg&width=100%25&fit=cover",
+      "brand": "Vans"
+    },
+    {
+      "id": 32,
+      "title": "Golden Goose Super Star - Black",
+      "price": 15999,
+      "stock": 15,
+      "category": "Urbanas",
+      "thumbnail": "https://images.stockx.com/360/Golden-Goose-Super-Star-Black-White-Leather-W/Images/Golden-Goose-Super-Star-Black-White-Leather-W/Lv2/img01.jpg?fm=webp&auto=compress&w=480&dpr=2&updated_at=1664432592&h=320&q=60",
+      "brand": "Golden Goose"
+    },
+    {
+      "id": 33,
+      "title": "New Balance Fresh Foam X 860v12 - Black",
+      "price": 12999,
+      "stock": 20,
+      "category": "Tenis",
+      "thumbnail": "https://d2ob0iztsaxy5v.cloudfront.net/product/196366/1963667220_zm.jpg",
+      "brand": "New Balance"
+    },
+    {
+      "id": 34,
+      "title": "Asics GEL-Kayano 28 - White",
+      "price": 13999,
+      "stock": 15,
+      "category": "Tenis",
+      "thumbnail": "https://static.ftshp.digital/img/p/6/7/4/9/7/1/674971-full_product.jpg",
+      "brand": "Asics"
+    },
+    {
+      "id": 35,
+      "title": "Nike Air Zoom Pegasus 38 - White",
+      "price": 11999,
+      "stock": 25,
+      "category": "Tenis",
+      "thumbnail": "https://i5.walmartimages.com/asr/bac97f28-9d8b-4fcb-a874-139b3b5b09a7_1.2db490eb7338563d23612b593d5b6c76.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+      "brand": "Nike"
+    },
+    {
+      "id": 36,
+      "title": "Havaianas Top Mix - Blue",
+      "price": 2999,
+      "stock": 50,
+      "category": "Ojotas",
+      "thumbnail": "https://rukminim2.flixcart.com/image/850/1000/kcz4rrk0/slipper-flip-flop/g/m/1/9-su-wt-blk-pt-deny-brown-black-white-original-imaftz9pasqrztwc.jpeg?q=20&crop=false",
+      "brand": "Havaianas"
+    },
+    {
+      "id": 37,
+      "title": "Off-White White Flip Flops",
+      "price": 4999,
+      "stock": 40,
+      "category": "Ojotas",
+      "thumbnail": "https://cdn-images.farfetch-contents.com/off-white-black-flip-flops_14683259_23646508_1000.jpg",
+      "brand": "Off-White"
+    },
+    {
+      "id": 38,
+      "title": "Crocs Classic Clog - Black",
+      "price": 3999,
+      "stock": 30,
+      "category": "Ojotas",
+      "thumbnail": "https://www.farmers.co.nz/INTERSHOP/static/WFS/Farmers-Shop-Site/-/Farmers-Shop/en_NZ/product/68/68/726/6868726_00_W1200_H1565.jpg",
+      "brand": "Crocs"
+    },
+    {
+      "id": 39,
+      "title": "Birkenstock Arizona EVA - White",
+      "price": 6999,
+      "stock": 20,
+      "category": "Ojotas",
+      "thumbnail": "https://d2ob0iztsaxy5v.cloudfront.net/product/330296/3302967060m1_zm.jpg",
+      "brand": "Birkenstock"
+    },
+    {
+      "id": 40,
+      "title": "Nike Metcon 9 Workout Shoes - White",
+      "price": 14999,
+      "stock": 20,
+      "category": "Training",
+      "thumbnail": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/ef1dafdd-37cc-4a75-8778-e55cea1185e8/metcon-9-workout-shoes-ndTxtM.png",
+      "brand": "Nike"
+    }
+  ];
 
-  const collectionRef = collection(DB, "products");
+
+  const collectionRef = collection(DB, "prod");
 
   /* for of */
   for (let item of items) {
